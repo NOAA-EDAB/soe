@@ -2,7 +2,7 @@
 #'
 #'
 
-load("/Users/sarahgaichas/Documents/Work/forageindex/survdat/Survdat.Rdata")
+load("/Users/sarah.gaichas/Documents/0_Data/forageindex/survdat/Survdat.Rdata")
 
 pulldate <- survey$pullDate
 functioncall <- survey$functionCall
