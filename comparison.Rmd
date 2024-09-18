@@ -1,0 +1,80 @@
+---
+title: "Ecodata Comparison Tool"
+author: "Brandon Beltz"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ecodata)
+library(ecodata24)
+library(dplyr)
+```
+
+# Submerged Aquatic Vegetation
+
+**Description**: The data provided here are the 1984-2022 area distribution and percent coverage of submerged aquatic vegetation in the Chesapeake Bay and its tributaries that area measured and calculated from photo-interpreted aerial imagery taken during surveys conducted in the growing season.
+
+**Point of contact**: [Christoper J. Patrick (cpatrick@vims.edu), David J. Wilcox (dwilcox@vims.edu)](mailto:Christoper J. Patrick (cpatrick@vims.edu), David J. Wilcox (dwilcox@vims.edu)){.email}
+
+## Mid-Atlantic
+
+```{r echo=FALSE}
+if(as.Date(file.mtime("R/sav.R")) < "2024-06-01") {print("NOT UPDATED")} else {print("UPDATED")}
+```
+
+```{r include=FALSE}
+finalyear<-max(ecodata24::SAV$Time)
+finalvalue24<-ecodata24::SAV %>% filter(Time==finalyear) %>% filter(Var=="Tidal") %>% pull(Value)
+prevvaluecurrent<-ecodata::SAV %>% filter(Time==finalyear) %>% filter(Var=="Tidal") %>% pull(Value)
+```
+
+```{r echo=FALSE}
+cat("Variation in year",finalyear,":", (prevvaluecurrent-finalvalue24)/finalvalue24,"% (Tidal Fresh)")
+```
+
+```{r include=FALSE}
+finalyear<-max(ecodata24::SAV$Time)
+finalvalue24<-ecodata24::SAV %>% filter(Time==finalyear) %>% filter(Var=="Polyhaline") %>% pull(Value)
+prevvaluecurrent<-ecodata::SAV %>% filter(Time==finalyear) %>% filter(Var=="Polyhaline") %>% pull(Value)
+```
+
+```{r echo=FALSE}
+cat("Variation in year",finalyear,":", (prevvaluecurrent-finalvalue24)/finalvalue24,"% (High Salinity)")
+```
+
+```{r include=FALSE}
+finalyear24<-max(ecodata24::SAV$Time)
+finalyearcurrent<-max(ecodata::SAV$Time)
+finalvalue24<-ecodata24::SAV %>% filter(Time==finalyear24) %>% filter(Var=="Tidal") %>% pull(Value)
+finalvaluecurrent<-ecodata::SAV %>% filter(Time==finalyearcurrent) %>% filter(Var=="Tidal") %>% pull(Value)
+```
+
+```{r echo=FALSE}
+cat("Change from",finalyear24,":", (finalvaluecurrent-finalvalue24)/finalvalue24,"% (Tidal Fresh)")
+```
+
+```{r include=FALSE}
+finalyear24<-max(ecodata24::SAV$Time)
+finalyearcurrent<-max(ecodata::SAV$Time)
+finalvalue24<-ecodata24::SAV %>% filter(Time==finalyear24) %>% filter(Var=="Polyhaline") %>% pull(Value)
+finalvaluecurrent<-ecodata::SAV %>% filter(Time==finalyearcurrent) %>% filter(Var=="Polyhaline") %>% pull(Value)
+```
+
+```{r echo=FALSE}
+cat("Change from",finalyear24,":", (finalvaluecurrent-finalvalue24)/finalvalue24,"% (High Salinity)")
+```
+
+### 2025
+```{r echo=FALSE}
+ecodata::plot_SAV()
+```
+
+### 2024
+```{r echo=FALSE}
+ecodata24::plot_SAV()
+```
