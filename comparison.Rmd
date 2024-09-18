@@ -24,7 +24,7 @@ library(dplyr)
 ## Mid-Atlantic
 
 ```{r echo=FALSE}
-if(as.Date(file.mtime("R/sav.R")) < "2024-06-01") {print("NOT UPDATED")} else {print("UPDATED")}
+if(as.Date(file.mtime("data/sav.rda")) < "2024-06-01") {print("NOT UPDATED")} else {print("UPDATED")}
 ```
 
 ```{r include=FALSE}
@@ -34,7 +34,7 @@ prevvaluecurrent<-ecodata::SAV %>% filter(Time==finalyear) %>% filter(Var=="Tida
 ```
 
 ```{r echo=FALSE}
-cat("Variation in year",finalyear,":", (prevvaluecurrent-finalvalue24)/finalvalue24,"% (Tidal Fresh)")
+cat("Variation in year",finalyear,":", round(((prevvaluecurrent-finalvalue24)/finalvalue24*100),2),"% (Tidal Fresh)")
 ```
 
 ```{r include=FALSE}
@@ -44,7 +44,7 @@ prevvaluecurrent<-ecodata::SAV %>% filter(Time==finalyear) %>% filter(Var=="Poly
 ```
 
 ```{r echo=FALSE}
-cat("Variation in year",finalyear,":", (prevvaluecurrent-finalvalue24)/finalvalue24,"% (High Salinity)")
+cat("Variation in year",finalyear,":", round(((prevvaluecurrent-finalvalue24)/finalvalue24*100),2),"% (High Salinity)")
 ```
 
 ```{r include=FALSE}
@@ -55,7 +55,7 @@ finalvaluecurrent<-ecodata::SAV %>% filter(Time==finalyearcurrent) %>% filter(Va
 ```
 
 ```{r echo=FALSE}
-cat("Change from",finalyear24,":", (finalvaluecurrent-finalvalue24)/finalvalue24,"% (Tidal Fresh)")
+cat("Change from",finalyear24,":", round(((finalvaluecurrent-finalvalue24)/finalvalue24*100),2),"% (Tidal Fresh)")
 ```
 
 ```{r include=FALSE}
@@ -66,7 +66,7 @@ finalvaluecurrent<-ecodata::SAV %>% filter(Time==finalyearcurrent) %>% filter(Va
 ```
 
 ```{r echo=FALSE}
-cat("Change from",finalyear24,":", (finalvaluecurrent-finalvalue24)/finalvalue24,"% (High Salinity)")
+cat("Change from",finalyear24,":", round(((finalvaluecurrent-finalvalue24)/finalvalue24*100),2),"% (High Salinity)")
 ```
 
 ### 2025
