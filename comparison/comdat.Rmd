@@ -1,0 +1,201 @@
+---
+title: "Commercial Landings and Revenue - ecodata comparison"
+author: "Brandon Beltz"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ecodata)
+library(ecodata24)
+library(dplyr)
+library(knitr)
+
+# Replace 'target_dataset' with intended dataset
+dataset<-ecodata::comdat
+dataset24<-ecodata24::comdat
+```
+
+# Commercial Landings and Revenue
+```{r eval=FALSE, include=FALSE}
+datastats<-data.frame(Variable=c("First Year","Final Year","Series Length","Minimum Value","Year of Min","Maximum Value","Year of Max","Mean Value","Median Value"),
+                      Last_Year=c(min(dataset24$Time),max(dataset24$Time),max(dataset24$Time)-min(dataset24$Time),min(dataset24$Value, na.rm = T),dataset24 %>% filter(Value==min(dataset24$Value, na.rm = T)) %>% pull(Time),max(dataset24$Value, na.rm = T),dataset24 %>% filter(Value==max(dataset24$Value, na.rm = T)) %>% pull(Time),mean(dataset24$Value, na.rm = T),median(dataset24$Value, na.rm = T)),
+                      Current_Year=c(min(dataset$Time),max(dataset$Time),max(dataset$Time)-min(dataset$Time),min(dataset$Value, na.rm = T),dataset %>% filter(Value==min(dataset$Value, na.rm = T)) %>% pull(Time),max(dataset$Value, na.rm = T),dataset %>% filter(Value==max(dataset$Value, na.rm = T)) %>% pull(Time),mean(dataset$Value, na.rm = T),median(dataset$Value, na.rm = T)))
+datastats$Difference<-datastats$Current_Year-datastats$Last_Year
+
+kable(datastats, digits = 2)
+```
+
+## Mid-Atlantic
+### Total landings
+```{r echo=FALSE, results='asis'}
+report<-"MidAtlantic"
+variable<-"landings"
+plottype<-"total"
+
+#data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
+
+#cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
+```
+
+### 2025
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### 2024
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata24::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### Guild landings
+```{r echo=FALSE, results='asis'}
+report<-"MidAtlantic"
+variable<-"landings"
+plottype<-"guild"
+
+#data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
+
+#cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
+```
+
+### 2025
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### 2024
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata24::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### Total revenue
+```{r echo=FALSE, results='asis'}
+report<-"MidAtlantic"
+variable<-"revenue"
+plottype<-"total"
+
+#data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
+
+#cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
+```
+
+### 2025
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### 2024
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata24::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### Guild revenue
+```{r echo=FALSE, results='asis'}
+report<-"MidAtlantic"
+variable<-"revenue"
+plottype<-"guild"
+
+#data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
+
+#cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
+```
+
+### 2025
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### 2024
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata24::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+## New England
+### Total landings
+```{r echo=FALSE, results='asis'}
+report<-"NewEngland"
+variable<-"landings"
+plottype<-"total"
+
+#data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
+
+#cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
+```
+
+### 2025
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### 2024
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata24::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### Guild landings
+```{r echo=FALSE, results='asis'}
+report<-"NewEngland"
+variable<-"landings"
+plottype<-"guild"
+
+#data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
+
+#cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
+```
+
+### 2025
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### 2024
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata24::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### Total revenue
+```{r echo=FALSE, results='asis'}
+report<-"NewEngland"
+variable<-"revenue"
+plottype<-"total"
+
+#data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
+
+#cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
+```
+
+### 2025
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### 2024
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata24::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### Guild revenue
+```{r echo=FALSE, results='asis'}
+report<-"NewEngland"
+variable<-"revenue"
+plottype<-"guild"
+
+#data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
+
+#cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
+```
+
+### 2025
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_comdat(report = report, varName = variable, plottype = plottype)
+```
+
+### 2024
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata24::plot_comdat(report = report, varName = variable, plottype = plottype)
+```

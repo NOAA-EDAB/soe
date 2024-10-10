@@ -1,0 +1,52 @@
+---
+title: "Massachusetts Inshore Survey - ecodata comparison"
+author: "Brandon Beltz"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ecodata)
+library(ecodata24)
+library(dplyr)
+library(knitr)
+
+# Replace 'target_dataset' with intended dataset
+dataset<-ecodata::mass_inshore_survey
+dataset24<-ecodata24::mass_inshore_survey
+```
+
+# Massachusetts Inshore Survey
+```{r echo=FALSE, include=TRUE}
+datastats<-data.frame(Variable=c("First Year","Final Year","Series Length","Minimum Value","Year of Min","Maximum Value","Year of Max","Mean Value","Median Value"),
+                      Last_Year=c(min(dataset24$Time),max(dataset24$Time),max(dataset24$Time)-min(dataset24$Time),min(dataset24$Value, na.rm = T),dataset24 %>% filter(Value==min(dataset24$Value, na.rm = T)) %>% pull(Time),max(dataset24$Value, na.rm = T),dataset24 %>% filter(Value==max(dataset24$Value, na.rm = T)) %>% pull(Time),mean(dataset24$Value, na.rm = T),median(dataset24$Value, na.rm = T)),
+                      Current_Year=c(min(dataset$Time),max(dataset$Time),max(dataset$Time)-min(dataset$Time),min(dataset$Value, na.rm = T),dataset %>% filter(Value==min(dataset$Value, na.rm = T)) %>% pull(Time),max(dataset$Value, na.rm = T),dataset %>% filter(Value==max(dataset$Value, na.rm = T)) %>% pull(Time),mean(dataset$Value, na.rm = T),median(dataset$Value, na.rm = T)))
+datastats$Difference<-datastats$Current_Year-datastats$Last_Year
+
+kable(datastats, digits = 2)
+```
+
+## New England
+```{r echo=FALSE, results='asis'}
+report<-"NewEngland"
+
+data_subset<-dataset24
+
+cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Time==max(data_subset$Time)) %>% filter(Var=="Piscivore Spring Biomass Index - MA") %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Time==max(data_subset$Time)) %>% filter(Var=="Piscivore Spring Biomass Index - MA")  %>% pull(Value),". These values differ by ",(dataset %>% filter(Time==max(data_subset$Time)) %>% filter(Var=="Piscivore Spring Biomass Index - MA") %>% pull(Value)-dataset24 %>% filter(Time==max(data_subset$Time)) %>% filter(Var=="Piscivore Spring Biomass Index - MA")  %>% pull(Value)),".")
+```
+
+### 2025
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_mass_inshore_survey(report = report)
+```
+
+### 2024
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ecodata24::plot_mass_inshore_survey(report = report)
+```
