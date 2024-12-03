@@ -4,8 +4,6 @@ author: "Brandon Beltz"
 date: "`r Sys.Date()`"
 output:
   html_document:
-    toc: true
-    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -22,7 +20,7 @@ dataset24<-ecodata24::exp_n |>
     tidyr::separate(Var, into = c("Var", "Season"), sep = "-")
 ```
 
-# Expected Number of Species
+# Expected Number of Species {.tabset}
 ```{r echo=FALSE, include=TRUE}
 datastats<-data.frame(Variable=c("First Year","Final Year","Series Length","Minimum Value","Year of Min","Maximum Value","Year of Max","Mean Value","Median Value"),
                       Last_Year=c(min(dataset24$Time),max(dataset24$Time),max(dataset24$Time)-min(dataset24$Time),min(dataset24$Value, na.rm = T),dataset24 %>% filter(Value==min(dataset24$Value, na.rm = T)) %>% pull(Time),max(dataset24$Value, na.rm = T),dataset24 %>% filter(Value==max(dataset24$Value, na.rm = T)) %>% pull(Time),mean(dataset24$Value, na.rm = T),median(dataset24$Value, na.rm = T)),
@@ -44,14 +42,9 @@ data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
 cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
 ```
 
-### 2025
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_exp_n(report = report, varName = season)
-```
-
-### 2024
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ecodata24::plot_exp_n(report = report, varName = season)
+```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_exp_n(report = report, varName = season) + ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
+ecodata24::plot_exp_n(report = report, varName = season) + ggplot2::ggtitle("SOE 2024") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## Mid-Atlantic - Fall
@@ -66,14 +59,9 @@ data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
 cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
 ```
 
-### 2025
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_exp_n(report = report, varName = season)
-```
-
-### 2024
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ecodata24::plot_exp_n(report = report, varName = season)
+```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_exp_n(report = report, varName = season) + ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
+ecodata24::plot_exp_n(report = report, varName = season) + ggplot2::ggtitle("SOE 2024") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## New England - Spring
@@ -88,14 +76,9 @@ data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
 cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
 ```
 
-### 2025
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_exp_n(report = report, varName = season)
-```
-
-### 2024
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ecodata24::plot_exp_n(report = report, varName = season)
+```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_exp_n(report = report, varName = season) + ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
+ecodata24::plot_exp_n(report = report, varName = season) + ggplot2::ggtitle("SOE 2024") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## New England - Fall
@@ -110,12 +93,7 @@ data_subset<-dataset24 %>% filter(Season==season) %>% filter(EPU==epu)
 cat("The value for ",max(data_subset$Time)," in the current dataset is ",dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". The value for ",max(data_subset$Time)," in last year's dataset was ",dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value),". These values differ by ",(dataset %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)-dataset24 %>% filter(Season==season) %>% filter(EPU==epu) %>% filter(Var==variable) %>% filter(Time==max(data_subset$Time)) %>% pull(Value)),".")
 ```
 
-### 2025
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_exp_n(report = report, varName = season)
-```
-
-### 2024
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ecodata24::plot_exp_n(report = report, varName = season)
+```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_exp_n(report = report, varName = season) + ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
+ecodata24::plot_exp_n(report = report, varName = season) + ggplot2::ggtitle("SOE 2024") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
