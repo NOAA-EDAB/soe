@@ -1,0 +1,36 @@
+---
+title: "Chesapeake Bay Salinity"
+author: "Brandon Beltz"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ecodata)
+library(ecodata24)
+library(dplyr)
+library(knitr)
+
+# Replace 'ch_bay_sal' with intended dataset
+dataset<-ecodata::ch_bay_sal
+dataset24<-ecodata24::ch_bay_sal
+
+# Define dataset-specific arguments for plot functions
+report<-list("MidAtlantic","NewEngland")
+#variable<-list()
+#plottype<-list("Stacked", "Catch")
+#epu<-list()
+```
+
+# Chesapeake Bay Salinity {.tabset}
+
+## `r paste(report[1])`
+```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, warning=FALSE}
+ecodata::plot_ch_bay_sal(report = report[1]) + 
+  ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
+
+ecodata24::plot_ch_bay_sal(report = report[1]) + 
+  ggplot2::ggtitle("SOE 2024") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
+```

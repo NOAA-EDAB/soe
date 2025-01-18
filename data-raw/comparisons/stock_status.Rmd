@@ -1,0 +1,44 @@
+---
+title: "Stock Status"
+author: "Brandon Beltz"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ecodata)
+library(ecodata24)
+library(dplyr)
+library(knitr)
+
+# Replace 'stock_status' with intended dataset
+dataset<-ecodata::stock_status
+dataset24<-ecodata24::stock_status
+
+# Define dataset-specific arguments for plot functions
+report<-list("MidAtlantic","NewEngland")
+#variable<-list()
+#plottype<-list("Stacked", "Catch")
+#epu<-list()
+```
+# Stock Status {.tabset}
+
+## `r paste(report[1])`
+```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, warning=FALSE}
+plot<-ecodata::plot_stock_status(report = report[1])
+plot$p
+
+plot24<-ecodata24::plot_stock_status(report = report[1])
+plot24$p
+```
+
+## `r paste(report[2])`
+```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, warning=FALSE}
+plot<-ecodata::plot_stock_status(report = report[2])
+plot$p
+
+plot24<-ecodata24::plot_stock_status(report = report[2])
+plot24$p
+```
