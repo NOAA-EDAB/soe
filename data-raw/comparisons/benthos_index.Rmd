@@ -13,9 +13,9 @@ library(ecodata24)
 library(dplyr)
 library(knitr)
 
-# Replace 'benthic_index' with intended dataset
-dataset<-ecodata::benthic_index
-#dataset24<-ecodata24::benthic_index
+# Replace 'benthos_index' with intended dataset
+dataset<-ecodata::benthos_index
+#dataset24<-ecodata24::benthos_index
 
 # Define dataset-specific arguments for plot functions
 report<-list("MidAtlantic","NewEngland")
@@ -36,48 +36,48 @@ kable(datastats, digits = 2)
 
 ## `r paste(report[1],variable[1],plottype[1])`
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_benthic_index(report = report[1],varName = variable[1],plottype = plottype[1], n = 10) + 
+ecodata::plot_benthos_index(report = report[1],varName = variable[1],plottype = plottype[1], n = 10) + 
   ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## `r paste(report[1],variable[1],plottype[2])`
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_benthic_index(report = report[1],varName = variable[1],plottype = plottype[2], n = 10) + 
+ecodata::plot_benthos_index(report = report[1],varName = variable[1],plottype = plottype[2], n = 10) + 
   ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## `r paste(report[2],variable[1],plottype[1])`
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_benthic_index(report = report[2],varName = variable[1],plottype = plottype[1], n = 10) + 
+ecodata::plot_benthos_index(report = report[2],varName = variable[1],plottype = plottype[1], n = 10) + 
   ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## `r paste(report[2],variable[1],plottype[2])`
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_benthic_index(report = report[2],varName = variable[1],plottype = plottype[2], n = 10) + 
+ecodata::plot_benthos_index(report = report[2],varName = variable[1],plottype = plottype[2], n = 10) + 
   ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## `r paste(report[1],variable[2],plottype[1])`
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_benthic_index(report = report[1],varName = variable[2],plottype = plottype[1], n = 10) + 
+ecodata::plot_benthos_index(report = report[1],varName = variable[2],plottype = plottype[1], n = 10) + 
   ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## `r paste(report[1],variable[2],plottype[2])`
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_benthic_index(report = report[1],varName = variable[2],plottype = plottype[2], n = 10) + 
+ecodata::plot_benthos_index(report = report[1],varName = variable[2],plottype = plottype[2], n = 10) + 
   ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## `r paste(report[2],variable[2],plottype[1])`
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_benthic_index(report = report[2],varName = variable[2],plottype = plottype[1], n = 10) + 
+ecodata::plot_benthos_index(report = report[2],varName = variable[2],plottype = plottype[1], n = 10) + 
   ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
 
 ## `r paste(report[2],variable[2],plottype[2])`
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ecodata::plot_benthic_index(report = report[2],varName = variable[2],plottype = plottype[2], n = 10) + 
+ecodata::plot_benthos_index(report = report[2],varName = variable[2],plottype = plottype[2], n = 10) + 
   ggplot2::ggtitle("SOE 2025") + ggplot2::theme(plot.title = ggplot2::element_text(size = 20))
 ```
